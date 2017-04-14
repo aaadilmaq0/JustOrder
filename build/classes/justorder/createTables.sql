@@ -34,3 +34,14 @@ create table CUSTOMERS(
     password varchar(50)
     primary key(username)
     );
+
+create table ORDERS(
+    orderID int,
+    primary key (orderID)
+    );
+
+create table DELIVERY(
+    custname varchar(50),
+    address  varchar(100),
+    primary key(custname)
+    );
