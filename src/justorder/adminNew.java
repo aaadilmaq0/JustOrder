@@ -15,6 +15,7 @@ public class adminNew extends javax.swing.JFrame {
      * Creates new form adminNew
      */
     DatabaseHelper dbH;
+
     public adminNew() {
         dbH = DatabaseHelper.getHelper();
         initComponents();
@@ -148,18 +149,18 @@ public class adminNew extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    dbH.addAdmin(jTextField1.getText(),jTextField2.getText(),jTextField3.getText(),jTextField4.getText(),jPasswordField1.getText());   
-    // TODO add your handling code here:
-    ok k=new ok(this,true);
-    k.show();
-    this.hide();
-    
+        dbH.addAdmin(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText(), jPasswordField1.getText());
+        // TODO add your handling code here:
+        ok k = new ok(this, true);
+        k.show();
+        this.hide();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-Welcome welcome=new Welcome();
-welcome.show();
-this.hide();// TODO add your handling code here:
+        Welcome welcome = new Welcome();
+        welcome.show();
+        this.hide();// TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

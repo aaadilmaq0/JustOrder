@@ -5,26 +5,36 @@
  */
 package justorder;
 
+import java.util.AbstractMap;
+import java.util.List;
+import java.util.Map;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author adil
  */
 public class adminPanel extends javax.swing.JFrame {
 
-   
+    DatabaseHelper dbH;
+    DefaultTableModel dtm;
 
-   DatabaseHelper dbH;
-
-    DefaultTableMOdel defaultTableMOdel;
     /**
      * Creates new form adminPanel
      */
     public adminPanel() {
         dbH = DatabaseHelper.getHelper();
         initComponents();
-        dbH.getAllItems();
-        defaultTableMOdel = new DefaultTableMOdel("Item Name","Item Price");
-        jTable1.setModel(defaultTableMOdel);
+        List<Map.Entry<String, Integer>> allItems = dbH.getAllItems();
+        allItems.add(new AbstractMap.SimpleEntry<>("ASD", 23));
+        allItems.add(new AbstractMap.SimpleEntry<>("AS123D", 2364));
+        allItems.add(new AbstractMap.SimpleEntry<>("A34SD", 2433));
+        allItems.add(new AbstractMap.SimpleEntry<>("ASD", 22343));
+        dtm = new DefaultTableModel(new String[]{"ASD", "ASD"}, 0);
+        for (int i = 0; i < allItems.size(); i++) {
+            dtm.addRow(new String[]{allItems.get(i).getKey(), String.valueOf(allItems.get(i).getValue())});
+        }
+        jTable1.setModel(dtm);
     }
 
     /**
@@ -75,6 +85,11 @@ public class adminPanel extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jButton2.setText("Remove Selected Item");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBorder(new javax.swing.border.MatteBorder(null));
 
@@ -146,8 +161,7 @@ public class adminPanel extends javax.swing.JFrame {
                         .addGap(12, 12, 12)
                         .addComponent(jLabel5)
                         .addGap(6, 6, 6)
-                        .addComponent(jScrollPane2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                        .addComponent(jScrollPane2))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
@@ -184,10 +198,14 @@ public class adminPanel extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        defaultTableMOdel.addRow(jTextField1.getText(), jTextField2.getText());
-        dbH.addItem(jTextField1.getText(),Double.parseDouble(jTextField2.getText()));
-        
+        dtm.addRow(new String[]{jTextField1.getText(), jTextField2.getText()});
+        dbH.addItem(jTextField1.getText(), Double.parseDouble(jTextField2.getText()));
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

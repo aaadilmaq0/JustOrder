@@ -48,6 +48,7 @@ public class DatabaseHelper {
     }
 
     public static DatabaseHelper getHelper() {
+        dbHelper = new DatabaseHelper();
         return dbHelper;
     }
 
@@ -68,21 +69,14 @@ public class DatabaseHelper {
 
     }
 
-    public void saveUser(User user) {
-
-    }
-
     public boolean checkAdmin(String username,String password){
-        
-    }
-    public boolean checkUser(User user) {
-
+        return true;
     }
 
     public boolean checkCustomer(String username,String passsword){
-        
+        return true;
     }
     public void removeItem(String name, double price) {
-
+          
     }
 }

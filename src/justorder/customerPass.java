@@ -7,7 +7,7 @@ package justorder;
 
 /**
  *
- * 
+ *
  * @author adil
  */
 public class customerPass extends javax.swing.JFrame {
@@ -16,8 +16,9 @@ public class customerPass extends javax.swing.JFrame {
      * Creates new form customerPass
      */
     DatabaseHelper dbH;
+
     public customerPass() {
-         dbH = DatabaseHelper.getHelper();
+        dbH = DatabaseHelper.getHelper();
         initComponents();
     }
 
@@ -117,21 +118,20 @@ public class customerPass extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        boolean cc=dbH.checkCustomer(jTextField1.getText(), jPasswordField1.getText());
-        if(cc)
-        {
-            customerPanel cp=new customerPanel();
+        boolean cc = dbH.checkCustomer(jTextField1.getText(), jPasswordField1.getText());
+        if (cc) {
+            customerPanel cp = new customerPanel();
             cp.show();
             this.hide();
-        }
-        else{
-            incorrect ic=new incorrect(this,true);
+        } else {
+            incorrect ic = new incorrect(this, true);
             ic.show();// TODO add your handling code here:
-       
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        customerNew cn=new customerNew();
+        customerNew cn = new customerNew();
         cn.show();        // TODO add your handling code here:
         this.hide();
     }//GEN-LAST:event_jButton2ActionPerformed

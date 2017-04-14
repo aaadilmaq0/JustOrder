@@ -17,6 +17,7 @@ public class adminPass extends javax.swing.JFrame {
      * Creates new form adminPass
      */
     DatabaseHelper dbH;
+
     public adminPass() {
         initComponents();
         dbH = DatabaseHelper.getHelper();
@@ -120,21 +121,19 @@ public class adminPass extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        boolean cc=dbH.checkAdmin(jTextField1.getText(), jPasswordField1.getText());
-        if(cc)
-        {
-            adminPanel cp=new adminPanel();
+        boolean cc = dbH.checkAdmin(jTextField1.getText(), jPasswordField1.getText());
+        if (cc) {
+            adminPanel cp = new adminPanel();
             cp.show();
             this.hide();
-        }
-        else{
-            incorrect ic=new incorrect(this,true);
+        } else {
+            incorrect ic = new incorrect(this, true);
             ic.show();// TODO add your handling code here:
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        adminNew an=new adminNew();
+        adminNew an = new adminNew();
         an.show();        // TODO add your handling code here:
         this.hide();
     }//GEN-LAST:event_jButton2ActionPerformed
