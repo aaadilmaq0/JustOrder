@@ -42,6 +42,7 @@ public class DatabaseHelper {
         }
         return null;
     }
+    
 
     private DatabaseHelper() {
     }
@@ -55,7 +56,14 @@ public class DatabaseHelper {
 
         return items;
     }
-
+    
+    public void addAdmin(String name,String email,String phone, String username, String password){
+        
+    }
+    
+    public void addCustomer(String name,String email,String phone,String username,String password){
+        
+    }
     public void addItem(String name, double price) {
 
     }
@@ -64,10 +72,16 @@ public class DatabaseHelper {
 
     }
 
+    public boolean checkAdmin(String username,String password){
+        
+    }
     public boolean checkUser(User user) {
 
     }
 
+    public boolean checkCustomer(String username,String passsword){
+        
+    }
     public void removeItem(String name, double price) {
 
     }
