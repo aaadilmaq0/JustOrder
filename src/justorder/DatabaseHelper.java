@@ -67,5 +67,9 @@ public class DatabaseHelper {
     public boolean checkUser(User user) {
 
     }
+    
+    public void removeItem(String name, double price){
+        
+    }
 
 }
