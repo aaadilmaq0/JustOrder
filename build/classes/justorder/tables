@@ -1,0 +1,11 @@
+tables ---
+
+ITEMS -- itemname, INRprice
+
+ADMINS -- adminname,phone,email,username,password
+
+CUSTOMERS -- customername,phone,email,username,password
+
+ORDERS -- orderID
+
+DELIVERY -- custname, address
