@@ -6,6 +6,7 @@
 package justorder;
 
 import java.sql.*;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -53,9 +54,21 @@ public class DatabaseHelper {
     }
 
     public List<Map.Entry<String, Integer>> getAllItems() {
-        List<Map.Entry<String, Integer>> items = new ArrayList<>();
-
-        return items;
+        try {
+            List<Map.Entry<String, Integer>> items = new ArrayList<>();
+            
+            Connection c = getCon();
+            Statement st = c.createStatement();
+            ResultSet s = st.executeQuery("select * from items");
+            while(!s.next()){
+                Map.Entry<String, Integer> me = new AbstractMap.SimpleEntry<>(s.getString(0), Integer.parseInt(s.getString(1)));
+                items.add(me);
+            }
+                      return items;
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
     
     public void addAdmin(String name,String email,String phone, String username, String password){
@@ -66,6 +79,13 @@ public class DatabaseHelper {
         
     }
     public void addItem(String name, double price) {
+        try {
+            Connection c = getCon();
+            PreparedStatement prepareStatement = c.prepareStatement("insert into items values("+name+","+price+");" );
+            prepareStatement.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
