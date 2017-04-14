@@ -5,9 +5,12 @@
  */
 package justorder;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,18 +18,40 @@ import java.util.Map;
  */
 public class Customer extends javax.swing.JFrame {
 
-    
     DatabaseHelper dbH;
-    List <Map.Entry<String, Integer>> menuItems;
-    
-    /**
-     * Creates new form Customer
-     */
-    public Customer() {
+    List<Map.Entry<String, Integer>> menuItems;
+    DefaultTableModel model;
+
+    public Customer() throws NullPointerException {
         initComponents();
-        dbH= DatabaseHelper.getHelper();
-        menuItems=dbH.getAllItems();
-        
+        try {
+            //dbH= DatabaseHelper.getHelper();
+            //menuItems=dbH.getAllItems();
+            menuItems = new ArrayList<Map.Entry<String, Integer>>();
+
+            menuItems.add(new AbstractMap.SimpleEntry<String, Integer>("Asd", 234));
+            menuItems.add(new AbstractMap.SimpleEntry<String, Integer>("Asd123", 2334));
+            menuItems.add(new AbstractMap.SimpleEntry<String, Integer>("Asffd", 234));
+            menuItems.add(new AbstractMap.SimpleEntry<String, Integer>("1wAsd", 234));
+
+            model = new DefaultTableModel();
+            menuTableFiller("Item","Price");
+            menuTable.setModel(model);
+        } catch (NullPointerException e) {
+            //JOptionPane.showMessageDialog(null, "Couldn't fetch values from Database","Error" JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Couldn't fetch values from DB", "Inane custom dialog", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    }
+
+    private void menuTableFiller(String columnA,String columnB) {
+        model.addColumn(columnA);
+        model.addColumn(columnB);
+
+        for (int i = 0; i < menuItems.size(); i++) {
+            model.addRow(new Object[]{menuItems.get(i).getKey(), menuItems.get(i).getValue()});
+        }
+
     }
 
     /**
@@ -41,7 +66,7 @@ public class Customer extends javax.swing.JFrame {
         menuPanel = new javax.swing.JPanel();
         menuScrollPanel = new javax.swing.JScrollPane();
         menuTable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
         orderPanel = new javax.swing.JPanel();
         orderScrollPanel = new javax.swing.JScrollPane();
         orderTable = new javax.swing.JTable();
@@ -62,34 +87,18 @@ public class Customer extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Food", "Price", "Select"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, true
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        menuTable.setColumnSelectionAllowed(true);
+        ));
         menuTable.getTableHeader().setReorderingAllowed(false);
         menuScrollPanel.setViewportView(menuTable);
-        menuTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        if (menuTable.getColumnModel().getColumnCount() > 0) {
-            menuTable.getColumnModel().getColumn(0).setResizable(false);
-            menuTable.getColumnModel().getColumn(1).setResizable(false);
-        }
 
-        jButton1.setText("Add to Order");
+        addButton.setText("Add to Order");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
@@ -100,7 +109,7 @@ public class Customer extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(menuPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         menuPanelLayout.setVerticalGroup(
@@ -108,7 +117,7 @@ public class Customer extends javax.swing.JFrame {
             .addGroup(menuPanelLayout.createSequentialGroup()
                 .addComponent(menuScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(addButton)
                 .addGap(21, 21, 21))
         );
 
@@ -116,13 +125,10 @@ public class Customer extends javax.swing.JFrame {
 
         orderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
-                "Order", "Quantity"
+
             }
         ));
         orderScrollPanel.setViewportView(orderTable);
@@ -230,6 +236,11 @@ public class Customer extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_removeButtonActionPerformed
 
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_addButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -263,14 +274,17 @@ public class Customer extends javax.swing.JFrame {
                 new Customer().setVisible(true);
             }
         });
+        
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
     private javax.swing.JLabel balanceLabel;
     private javax.swing.JTextField balanceTextField;
     private javax.swing.JButton checkoutButton;
     private javax.swing.JPanel checkoutPanel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JScrollPane menuScrollPanel;
     private javax.swing.JTable menuTable;
