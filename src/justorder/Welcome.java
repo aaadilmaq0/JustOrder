@@ -77,8 +77,9 @@ public class Welcome extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        adminLogin l = new adminLogin();
-        
+        adminPass a = new adminPass();
+        a.show();
+        this.hide();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
