@@ -50,16 +50,16 @@ public class DatabaseHelper {
         return dbHelper;
     }
 
-    public List<Map<String, Integer>> getAllItems() {
-        List<Map<String, Integer>> items = new ArrayList<>();
+    public List<Map.Entry<String, Integer>> getAllItems() {
+        List<Map.Entry<String, Integer>> items = new ArrayList<>();
 
         return items;
     }
 
     public void addItem(String name, double price) {
-        
+
     }
-    
+
     public void saveUser(User user) {
 
     }
@@ -67,9 +67,8 @@ public class DatabaseHelper {
     public boolean checkUser(User user) {
 
     }
-    
-    public void removeItem(String name, double price){
-        
-    }
 
+    public void removeItem(String name, double price) {
+
+    }
 }
