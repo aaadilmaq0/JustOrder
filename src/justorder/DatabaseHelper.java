@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class DatabaseHelper {
 
-    private static DatabaseHelper dbHelper;
+    public static DatabaseHelper dbHelper;
 
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -100,17 +100,14 @@ public class DatabaseHelper {
             Connection c = getCon();
             PreparedStatement prepareStatement = c.prepareStatement("insert into items values(" + name + "," + price + ");");
             prepareStatement.execute();
-        } catch (SQLException ex) {
+        }
+        catch (SQLException ex) {
             Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-<<<<<<< HEAD
-    //public boolean checkUser(User user) {
 
-    //}
-=======
     public boolean checkAdmin(String username, String password) {
         try {
             Connection c = getCon();
@@ -140,7 +137,6 @@ public class DatabaseHelper {
         }
         return false;
     }
->>>>>>> 9fdee10660be48cf9bc9bec4a4de92ff927664d6
 
     public void removeItem(String name, double price) {
         try {

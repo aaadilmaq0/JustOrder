@@ -204,7 +204,11 @@ public class adminPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        int i=jTable1.getSelectedRow();
+        Object s1=dtm.getValueAt(i, 0);
+        Object s2=dtm.getValueAt(i, 1);
+        dbH.removeItem(s1.toString(), Double.parseDouble(s2.toString()));
+        jTable1.remove(i);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
