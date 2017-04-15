@@ -22,7 +22,7 @@ create table ADMINS(
     email varchar(50),
     phone varchar(50),
     username varchar(50),
-    password varchar(50)
+    password varchar(50),
     primary key(username)
     );
 
@@ -31,7 +31,7 @@ create table CUSTOMERS(
     email varchar(50),
     phone varchar(50),
     username varchar(50),
-    password varchar(50)
+    password varchar(50),
     primary key(username)
     );
 

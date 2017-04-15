@@ -73,10 +73,11 @@ public class DatabaseHelper {
 
     public void addAdmin(String name, String email, String phone, String username, String password) {
         try {
-            StringJoiner joiner = new StringJoiner(",");
+            StringJoiner joiner = new StringJoiner("','");
             Connection c = getCon();
-            PreparedStatement prepareStatement = c.prepareStatement("insert into admin "
-                    + "values(" + joiner.add(username).add(password).add(name).add(email).add(phone).add(name).toString() + ");");
+            PreparedStatement prepareStatement = c.prepareStatement("insert into admins "
+                    + "values('" + joiner.add(name).add(email).add(phone).add(username).add(password).toString() + "');");
+
             prepareStatement.execute();
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
@@ -85,10 +86,12 @@ public class DatabaseHelper {
 
     public void addCustomer(String name, String email, String phone, String username, String password) {
         try {
-            StringJoiner joiner = new StringJoiner(",");
+            StringJoiner joiner = new StringJoiner("','");
             Connection c = getCon();
-            PreparedStatement prepareStatement = c.prepareStatement("insert into customer "
-                    + "values(" + joiner.add(username).add(password).add(name).add(email).add(phone).add(name).toString() + ");");
+            String sql = "insert into customers "
+                    + "values('" + joiner.add(name).add(email).add(phone).add(username).add(password).toString() + "');";
+            System.out.println(sql);
+            PreparedStatement prepareStatement = c.prepareStatement(sql);
             prepareStatement.execute();
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
@@ -98,51 +101,40 @@ public class DatabaseHelper {
     public void addItem(String name, double price) {
         try {
             Connection c = getCon();
-            PreparedStatement prepareStatement = c.prepareStatement("insert into items values(" + name + "," + price + ");");
+            String sql = "insert into items values(" + name + "," + price + ");";
+            System.out.println(sql);
+            PreparedStatement prepareStatement = c.prepareStatement(sql);
             prepareStatement.execute();
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }
-
-
-    public boolean checkUser(String username, String password) {
-         try {
-            Connection c = getCon();
-            Statement st = c.createStatement();
-            ResultSet s = st.executeQuery("select username, password from customer where username=" + username + " and password=" + password);
-            s.next();
-            if (s.getString(0).equals(username) && s.getString(1).equals(password)) {
-                return true;
-            }
-        } catch (SQLException ex) {
-            return false;
-        }
-        return false;
-    }
-    
-    public boolean checkAdmin(String username, String password) {
-        try {
-            Connection c = getCon();
-            Statement st = c.createStatement();
-            ResultSet s = st.executeQuery("select username, password from admin where username=" + username + " and password=" + password);
-            s.next();
-            if (s.getString(0).equals(username) && s.getString(1).equals(password)) {
-                return true;
-            }
-        } catch (SQLException ex) {
-            return false;
-        }
-        return false;
     }
 
     public boolean checkCustomer(String username, String password) {
         try {
             Connection c = getCon();
             Statement st = c.createStatement();
-            ResultSet s = st.executeQuery("select username, password from customer where username=" + username + " and password=" + password);
+            String sql = "select username, password from customers where username='" + username + "' and password='" + password + "';";
+            System.out.println(sql);
+            ResultSet s = st.executeQuery(sql);
+            s.first();
+
+            if (s.getString(s.findColumn("username")).equals(username) && s.getString(s.findColumn("password")).equals(password)) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            return false;
+        }
+        return false;
+    }
+
+    public boolean checkAdmin(String username, String password) {
+        try {
+            Connection c = getCon();
+            Statement st = c.createStatement();
+            String sql = "select username, password from admins where username='" + username + "' and password='" + password + "';";
+            ResultSet s = st.executeQuery(sql);
             s.next();
             if (s.getString(0).equals(username) && s.getString(1).equals(password)) {
                 return true;
@@ -156,7 +148,7 @@ public class DatabaseHelper {
     public void removeItem(String name, double price) {
         try {
             Connection c = getCon();
-            PreparedStatement prepareStatement = c.prepareStatement("delete from items where name=" + name + " and price=" + price + ";");
+            PreparedStatement prepareStatement = c.prepareStatement("delete from items where name='" + name + "' and price=" + price + ";");
             prepareStatement.execute();
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);

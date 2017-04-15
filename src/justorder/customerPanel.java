@@ -4,17 +4,14 @@
  * and open the template in the editor.
  */
 package justorder;
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.StringStack;
+
 import java.sql.*;
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.StringJoiner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import javax.swing.ListModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -37,7 +34,8 @@ public class customerPanel extends javax.swing.JFrame {
     //  Database credentials
     static final String USER = "root";
     static final String PASS = "root";
-DefaultTableModel dtm;
+    DefaultTableModel dtm;
+
     private Connection getCon() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -53,30 +51,29 @@ DefaultTableModel dtm;
     }
 
     public customerPanel() {
-        recent=0.0;
-        dlm=new DefaultListModel();
+        initComponents();
+        recent = 0.0;
+        dlm = new DefaultListModel();
         jList1.setModel(dlm);
-        
+
         dtm = new DefaultTableModel(new String[]{"ASD", "ASD"}, 0);
         menuTable.setModel(dtm);
-        menu=new String[50][2];
-        x=0;
-        initComponents();
+        menu = new String[50][2];
+        x = 0;
         try {
             List<Map.Entry<String, Integer>> items = new ArrayList<>();
 
             Connection c = getCon();
             Statement st = c.createStatement();
             ResultSet s = st.executeQuery("select * from ITEMS");
-            while(s.next()){
-                String s1=s.getString("itemname");
-                String s2=""+s.getDouble("INRprice");
-                dtm.addRow(new String[]{s1,s2});
-                menu[x][0]=s1;
-                menu[x++][1]=s2;
+            while (s.next()) {
+                String s1 = s.getString("itemname");
+                String s2 = "" + s.getDouble("INRprice");
+                dtm.addRow(new String[]{s1, s2});
+                menu[x][0] = s1;
+                menu[x++][1] = s2;
             }
-            }
-        catch(Exception any){
+        } catch (Exception any) {
             Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, any);
         }
     }
@@ -372,14 +369,14 @@ DefaultTableModel dtm;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int i=menuTable.getSelectedColumnCount();
-        Object s1=dtm.getValueAt(i, 0);
-        Object s2=dtm.getValueAt(i, 1);
+        int i = menuTable.getSelectedColumnCount();
+        Object s1 = dtm.getValueAt(i, 0);
+        Object s2 = dtm.getValueAt(i, 1);
         dlm.addElement(s1.toString());
-        double d=Double.parseDouble(jTextField3.getText());
-        recent=Double.parseDouble(s2.toString());
-        d=d+recent;
-        jTextField3.setText(""+d);// TODO add your handling code here:
+        double d = Double.parseDouble(jTextField3.getText());
+        recent = Double.parseDouble(s2.toString());
+        d = d + recent;
+        jTextField3.setText("" + d);// TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
@@ -387,25 +384,25 @@ DefaultTableModel dtm;
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int i=jList1.getSelectedIndex();
-        double dt=0.0;
-        Object str=dlm.get(i);
-        for(int j=0;j<x;j++){
-            if(menu[j][0].equalsIgnoreCase(str.toString())){
-                dt=Double.parseDouble(menu[j][1]);
+        int i = jList1.getSelectedIndex();
+        double dt = 0.0;
+        Object str = dlm.get(i);
+        for (int j = 0; j < x; j++) {
+            if (menu[j][0].equalsIgnoreCase(str.toString())) {
+                dt = Double.parseDouble(menu[j][1]);
                 break;
             }
         }
-        double dtt=Double.parseDouble(jTextField3.getText());
-        dtt=dtt-dt;
-        jTextField3.setText(""+dtt);
+        double dtt = Double.parseDouble(jTextField3.getText());
+        dtt = dtt - dt;
+        jTextField3.setText("" + dtt);
         jList1.remove(i);
-            // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       confirmation confirm = new confirmation(this,true);
-       confirm.show();
+        confirmation confirm = new confirmation(this, true);
+        confirm.show();
         this.hide();// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
