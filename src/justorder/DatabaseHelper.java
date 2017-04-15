@@ -108,6 +108,10 @@ public class DatabaseHelper {
     }
 
 
+    public boolean checkUser(User user) {
+        return true;
+    }
+    
     public boolean checkAdmin(String username, String password) {
         try {
             Connection c = getCon();
