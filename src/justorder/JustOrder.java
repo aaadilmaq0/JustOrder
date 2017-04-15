@@ -16,8 +16,8 @@ public class JustOrder {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Welcome welcome=new Welcome();
+        Welcome welcome = new Welcome();
         welcome.show();
     }
-    
+
 }

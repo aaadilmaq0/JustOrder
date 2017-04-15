@@ -151,7 +151,7 @@ public class DatabaseHelper {
     public void removeItem(String name, double price) {
         try {
             Connection c = getCon();
-            PreparedStatement prepareStatement = c.prepareStatement("delete from items where name='" + name + "' and price=" + price + ";");
+            PreparedStatement prepareStatement = c.prepareStatement("delete from items where itemname='" + name + "' and INRprice=" + price + ";");
             prepareStatement.execute();
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);

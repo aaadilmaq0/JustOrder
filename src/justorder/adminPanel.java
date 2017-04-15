@@ -22,7 +22,7 @@ public class adminPanel extends javax.swing.JFrame {
     /**
      * Creates new form adminPanel
      */
-    public adminPanel() {
+    public adminPanel(String text) {
         dbH = DatabaseHelper.getHelper();
         initComponents();
         List<Map.Entry<String, Float>> allItems = dbH.getAllItems();
@@ -31,6 +31,7 @@ public class adminPanel extends javax.swing.JFrame {
             dtm.addRow(new String[]{allItems.get(i).getKey(), String.valueOf(allItems.get(i).getValue())});
         }
         jTable1.setModel(dtm);
+        jTextPane1.setText(text);
     }
 
     /**
@@ -60,7 +61,6 @@ public class adminPanel extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Your Restaurant ");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -101,9 +101,11 @@ public class adminPanel extends javax.swing.JFrame {
 
         jLabel4.setText("Item Price");
 
-        jTextField1.setText("jTextField1");
-
-        jTextField2.setText("jTextField2");
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -142,8 +144,9 @@ public class adminPanel extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel5.setText("Admin Name ");
+        jLabel5.setText("Admin Username  ");
 
+        jTextPane1.setEditable(false);
         jScrollPane2.setViewportView(jTextPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -178,7 +181,7 @@ public class adminPanel extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(15, 15, 15)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -200,12 +203,16 @@ public class adminPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int i=jTable1.getSelectedRow();
-        Object s1=dtm.getValueAt(i, 0);
-        Object s2=dtm.getValueAt(i, 1);
+        int i = jTable1.getSelectedRow();
+        Object s1 = dtm.getValueAt(i, 0);
+        Object s2 = dtm.getValueAt(i, 1);
         dbH.removeItem(s1.toString(), Double.parseDouble(s2.toString()));
-        jTable1.remove(i);        // TODO add your handling code here:
+        dtm.removeRow(i);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,7 +244,7 @@ public class adminPanel extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new adminPanel().setVisible(true);
+                new adminPanel("ASD").setVisible(true);
             }
         });
     }

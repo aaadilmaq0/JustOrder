@@ -88,8 +88,8 @@ public class Welcome extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-        customerPass cp=new customerPass();
+
+        customerPass cp = new customerPass();
         cp.show();
         this.hide();// TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed

@@ -73,9 +73,9 @@ public class ok extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    Welcome welcome=new Welcome();
-    welcome.show();
-    this.hide();// TODO add your handling code here:
+        Welcome welcome = new Welcome();
+        welcome.show();
+        this.hide();// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

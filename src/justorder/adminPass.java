@@ -123,7 +123,7 @@ public class adminPass extends javax.swing.JFrame {
         // TODO add your handling code here:
         boolean cc = dbH.checkAdmin(jTextField1.getText(), jPasswordField1.getText());
         if (cc) {
-            adminPanel cp = new adminPanel();
+            adminPanel cp = new adminPanel(jTextField1.getText());
             cp.show();
             this.hide();
         } else {
