@@ -53,17 +53,20 @@ public class DatabaseHelper {
         return dbHelper;
     }
 
-    public List<Map.Entry<String, Integer>> getAllItems() {
+    public List<Map.Entry<String, Float>> getAllItems() {
         try {
-            List<Map.Entry<String, Integer>> items = new ArrayList<>();
+            List<Map.Entry<String, Float>> items = new ArrayList<>();
 
             Connection c = getCon();
             Statement st = c.createStatement();
-            ResultSet s = st.executeQuery("select * from items");
-            while (!s.next()) {
-                Map.Entry<String, Integer> me = new AbstractMap.SimpleEntry<>(s.getString(0), Integer.parseInt(s.getString(1)));
+            ResultSet s = st.executeQuery("select * from items;");
+            s.first();
+            while (s.next()) {
+                Map.Entry<String, Float> me = new AbstractMap.SimpleEntry<>(s.getString(s.findColumn("itemname")), s.getFloat("INRprice"));
                 items.add(me);
             }
+
+            System.out.println(items.size());
             return items;
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
@@ -101,7 +104,7 @@ public class DatabaseHelper {
     public void addItem(String name, double price) {
         try {
             Connection c = getCon();
-            String sql = "insert into items values(" + name + "," + price + ");";
+            String sql = "insert into items values('" + name + "'," + price + ");";
             System.out.println(sql);
             PreparedStatement prepareStatement = c.prepareStatement(sql);
             prepareStatement.execute();
@@ -136,7 +139,7 @@ public class DatabaseHelper {
             String sql = "select username, password from admins where username='" + username + "' and password='" + password + "';";
             ResultSet s = st.executeQuery(sql);
             s.next();
-            if (s.getString(0).equals(username) && s.getString(1).equals(password)) {
+            if (s.getString(s.findColumn("username")).equals(username) && s.getString(s.findColumn("password")).equals(password)) {
                 return true;
             }
         } catch (SQLException ex) {
@@ -153,5 +156,18 @@ public class DatabaseHelper {
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void addOrder(int t) {
+        try {
+            Connection c = getCon();
+            String sql = "insert into orders(" + t + ");";
+            System.out.println(sql);
+            PreparedStatement prepareStatement = c.prepareStatement(sql);
+            prepareStatement.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }

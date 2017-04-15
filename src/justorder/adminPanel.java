@@ -25,11 +25,7 @@ public class adminPanel extends javax.swing.JFrame {
     public adminPanel() {
         dbH = DatabaseHelper.getHelper();
         initComponents();
-        List<Map.Entry<String, Integer>> allItems = dbH.getAllItems();
-        allItems.add(new AbstractMap.SimpleEntry<>("ASD", 23));
-        allItems.add(new AbstractMap.SimpleEntry<>("AS123D", 2364));
-        allItems.add(new AbstractMap.SimpleEntry<>("A34SD", 2433));
-        allItems.add(new AbstractMap.SimpleEntry<>("ASD", 22343));
+        List<Map.Entry<String, Float>> allItems = dbH.getAllItems();
         dtm = new DefaultTableModel(new String[]{"ASD", "ASD"}, 0);
         for (int i = 0; i < allItems.size(); i++) {
             dtm.addRow(new String[]{allItems.get(i).getKey(), String.valueOf(allItems.get(i).getValue())});

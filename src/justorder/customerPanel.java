@@ -61,7 +61,7 @@ public class customerPanel extends javax.swing.JFrame {
         menu = new String[50][2];
         x = 0;
         try {
-            List<Map.Entry<String, Integer>> items = new ArrayList<>();
+            List<Map.Entry<String, Float>> items = new ArrayList<>();
 
             Connection c = getCon();
             Statement st = c.createStatement();
@@ -127,10 +127,6 @@ public class customerPanel extends javax.swing.JFrame {
 
         jLabel5.setText("Full Address  ");
 
-        jTextField1.setText("jTextField1");
-
-        jTextField2.setText("jTextField2");
-
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
@@ -195,6 +191,7 @@ public class customerPanel extends javax.swing.JFrame {
 
             }
         ));
+        menuTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         menuTable.getTableHeader().setReorderingAllowed(false);
         menuScrollPanel.setViewportView(menuTable);
 
@@ -370,8 +367,9 @@ public class customerPanel extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int i = menuTable.getSelectedColumnCount();
-        Object s1 = dtm.getValueAt(i, 0);
-        Object s2 = dtm.getValueAt(i, 1);
+
+        Object s1 = dtm.getValueAt(menuTable.getSelectedRow(), 0);
+        Object s2 = dtm.getValueAt(menuTable.getSelectedRow(), 1);
         dlm.addElement(s1.toString());
         double d = Double.parseDouble(jTextField3.getText());
         recent = Double.parseDouble(s2.toString());
