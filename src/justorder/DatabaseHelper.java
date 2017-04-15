@@ -108,8 +108,19 @@ public class DatabaseHelper {
     }
 
 
-    public boolean checkUser(User user) {
-        return true;
+    public boolean checkUser(String username, String password) {
+         try {
+            Connection c = getCon();
+            Statement st = c.createStatement();
+            ResultSet s = st.executeQuery("select username, password from customer where username=" + username + " and password=" + password);
+            s.next();
+            if (s.getString(0).equals(username) && s.getString(1).equals(password)) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            return false;
+        }
+        return false;
     }
     
     public boolean checkAdmin(String username, String password) {
